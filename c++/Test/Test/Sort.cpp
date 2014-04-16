@@ -76,21 +76,23 @@ void insertSort(int* arr,int length)
 {
 	for(int i=1;i<length;i++)
 	{
-		int pos = i;
-		for(int j=i-1;j>=0;j--)
-		{
-			if(arr[i]<arr[j])
-				pos = j;
-			else
-				break;
-		}
-		//插入之后的元素都要往后移
-		if(pos < i)
+		if(arr[i]<arr[i-1])
 		{
 			int temp = arr[i];
-			for(int m=i;m>=pos;m--)
-				arr[m] = arr[m-1];
-			arr[pos] = temp;
+			int j;
+			for(j=i-1;arr[j]>temp;j--)
+				arr[j+1] = arr[j];
+			arr[j+1] = temp;
 		}
 	}
 }
+
+//希尔排序
+//void shellSort(int* arr,int length)
+//{
+//	int increment = length/3+1;
+//	while(increment>=1){
+//		//for(int i=)
+//		increment = increment/3+1;
+//	}
+//}
