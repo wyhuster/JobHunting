@@ -12,6 +12,7 @@ void shellSort(int* arr,int length);
 void heapSort(int* arr, int length);
 void mergeSort(int* arr, int length);
 void mergeSort2(int* arr, int length);
+void quickSort(int *arr, int length);
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -29,7 +30,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//shellSort(number,length);
 	//heapSort(number,length);
 	//mergeSort(number,length);
-	mergeSort2(number,length);
+	//mergeSort2(number,length);
+	quickSort(number,length);
 
 	printf("after  sort: ");
 	for(int i=0;i<length;i++)
@@ -277,4 +279,49 @@ void mergePass(int* arr1, int* arr2, int s, int n)
 	else
 		for(int j=i-1;j<n;j++)
 			arr2[j] = arr1[j]; 
+}
+
+/**
+*--------------快速排序------------------
+*时间复杂度：平均、最好O(nlogn)，最坏O(n^2)
+*空间复杂度: O(logn)~O(n)
+*不稳定
+**/
+void quickSort(int *arr, int length)
+{
+	void qSort(int *arr, int low, int high);
+
+	qSort(arr, 0, length-1);
+}
+
+//对数组中的子序列arr[low..high]作快速排序
+void qSort(int *arr, int low, int high)
+{
+	int partition(int *arr, int low, int high);
+
+	int pivot;
+	if(low<high)
+	{
+		pivot = partition(arr, low, high);
+		qSort(arr, low, pivot-1);
+		qSort(arr, pivot+1, high);
+	}
+}
+
+//交换数组中子表的记录，使枢纽记录到位，并返回其位置
+int partition(int *arr, int low, int high)
+{
+	int pivotkey;
+	pivotkey = arr[low];//子序列中的第一个记录作为枢纽记录
+	while(low<high)
+	{
+		while(low<high&&arr[high]>pivotkey)
+			high--;
+		swap(arr,low,high);
+		
+		while(low<high&&arr[low]<=pivotkey)
+			low++;
+		swap(arr,low,high);
+	}
+	return low;
 }
