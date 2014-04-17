@@ -11,6 +11,7 @@ void insertSort(int* arr,int length);
 void shellSort(int* arr,int length);
 void heapSort(int* arr, int length);
 void mergeSort(int* arr, int length);
+void mergeSort2(int* arr, int length);
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -27,7 +28,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	//insertSort(number,length);
 	//shellSort(number,length);
 	//heapSort(number,length);
-	mergeSort(number,length);
+	//mergeSort(number,length);
+	mergeSort2(number,length);
 
 	printf("after  sort: ");
 	for(int i=0;i<length;i++)
@@ -237,4 +239,42 @@ void merge(int* arr1, int* arr2, int s, int m, int e)
 			arr2[i+k] = arr1[m+1+k];
 	}
 
+}
+
+
+/**
+*--------------归并排序，非递归实现------------------
+*时间复杂度：O(nlogn)
+*空间复杂度: 归并过程中的存储空间O(n)
+*稳定
+**/
+void mergeSort2(int* arr, int length)
+{
+	void mergePass(int* arr1, int* arr2, int s, int n);
+
+	int* tr = new int[length];
+	int k=1;
+	while(k<length)
+	{
+		mergePass(arr,tr,k,length);
+		k = 2*k;
+		mergePass(tr,arr,k,length);
+		k = 2*k;
+	}
+}
+
+//将arr1中相邻为s的子序列两两归并到arr2中
+void mergePass(int* arr1, int* arr2, int s, int n)
+{
+	int i = 1;
+	while(i<=n-2*s+1)
+	{
+		merge(arr1,arr2,i-1,i+s-1-1,i+2*s-1-1);
+		i=i+2*s;
+	}
+	if(i<n-s+1)
+		merge(arr1,arr2,i-1,i+s-1-1,n-1);
+	else
+		for(int j=i-1;j<n;j++)
+			arr2[j] = arr1[j]; 
 }
