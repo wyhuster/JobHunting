@@ -1,6 +1,7 @@
 // Sort.cpp : 定义控制台应用程序的入口点。
 // 
-#include "stdafx.h"
+#include "stdio.h"
+#include "malloc.h"
 
 #define MAXSIZE 10
 
@@ -15,10 +16,10 @@ void mergeSort2(int* arr, int length);
 void quickSort(int *arr, int length);
 
 
-int _tmain(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 	int number[10]={10,2,3,5,7,7,2,1,0,-1};
-	int length = sizeof(number)/sizeof(int);
+	const int length = sizeof(number)/sizeof(int); //length不定义为const，mergeSort执行后会变成1，不解..
 	printf("before sort: ");
 	for(int i=0;i<length;i++)
 		printf("%d  ",number[i]);
@@ -29,11 +30,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	//insertSort(number,length);
 	//shellSort(number,length);
 	//heapSort(number,length);
-	//mergeSort(number,length);
+	mergeSort(number,length);
 	//mergeSort2(number,length);
-	quickSort(number,length);
+	//quickSort(number,length);
 
 	printf("after  sort: ");
+
 	for(int i=0;i<length;i++)
 		printf("%d  ",number[i]);
 	
@@ -204,7 +206,8 @@ void mSort(int* arr1, int* arr2, int s, int e)
 {
 	void merge(int* arr1, int* arr2, int s, int m, int e);
 
-	int *arr = new int[MAXSIZE];
+	//int *arr = new int[MAXSIZE];
+	int *arr = (int*)malloc(MAXSIZE*sizeof(int));
 	if(s == e)
 		arr2[s]=arr1[s];
 	else
