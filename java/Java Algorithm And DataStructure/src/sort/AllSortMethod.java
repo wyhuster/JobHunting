@@ -10,11 +10,11 @@ public class AllSortMethod {
 		int[] n = { 9, 1, 5, 8, };
 		System.out.println(Arrays.toString(n));
 
-//		BubbleSortMethod.bubbleSort0(n);
-//		SelectSortMethod.selectSort(n);
-//		InsertSortMethod.insertSort(n);
-//		ShellSortMethod.shellSort(n);
-//		MergeSortMethod.mergerSort(n);
+		// BubbleSortMethod.bubbleSort0(n);
+		// SelectSortMethod.selectSort(n);
+		// InsertSortMethod.insertSort(n);
+		// ShellSortMethod.shellSort(n);
+		// MergeSortMethod.mergerSort(n);
 		HeapSortMethod.heapSort(n);
 	}
 }
@@ -192,7 +192,7 @@ class MergeSortMethod {
 	}
 
 	private static void merge(int[] array, int from, int end, int mid) {
-		int[] tmpArray = new int[10];
+		int[] tmpArray = new int[end - from + 1];
 		int tmpArrayIndex = 0;
 		int part1ArrayIndex = from;
 		int part2ArrayIndex = mid + 1;
