@@ -1,5 +1,13 @@
 package search;
 
+/**
+ * @author Administrator
+ * 折半查找的实现，时间复杂度O(logn)
+ * 另外一种实现是插值查找，不是每次都折半，
+ * 折半查找中，middle = (low + high ) / 2 = low + 1/2 *(high - low)
+ * 将上面的公式替换为middle = low + (key - a[low]) / (a[high] - a[low]) *(high-low)
+ * 适用情况：表中关键字分布比较均匀，使用插值查找比较适合.
+ */
 public class BinarySerach {
 
 	// suppose input is an ascending sort array.
