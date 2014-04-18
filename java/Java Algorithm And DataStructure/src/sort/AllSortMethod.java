@@ -1,8 +1,6 @@
 package sort;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import static net.mindview.util.Print.*;
 

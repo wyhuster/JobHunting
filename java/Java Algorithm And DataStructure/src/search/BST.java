@@ -1,3 +1,5 @@
+package search;
+
 class Node<T> {
 	private T value;
 
