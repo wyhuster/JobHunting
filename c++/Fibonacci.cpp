@@ -1,3 +1,11 @@
+/*!
+* 
+* 计算斐波那契数列第n个元素，用递归和非递归实现
+* \author tonywang
+* \date 2014/4/18 11:50
+*
+*/
+
 #include<stdio.h>
 
 int fibonacci_recursion(int n);

@@ -1,3 +1,12 @@
+/*!
+* 
+* 实现有序表的查找算法，包括递归实现二分查找，
+* 非递归实现二分查找，插值查找
+* \author tonywang
+* \date 2014/4/17 21:50
+*
+*/
+
 #include<stdio.h>
 #include <stdlib.h> 
 
