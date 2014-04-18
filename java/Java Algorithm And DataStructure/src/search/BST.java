@@ -62,6 +62,11 @@ class NodeValue implements Comparable<NodeValue> {
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		return "NodeValue [x=" + x + ", y=" + y + "]";
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -92,6 +97,22 @@ public class BST {
 		inOrderTraverse(root);
 
 		if (binarySerach(root, 12)) {
+			System.out.println("二叉树中存在此元素");
+		} else {
+			System.out.println("二叉树中不存在该元素");
+		}
+		System.out.println("------------------------");
+		NodeValue[] array1 = { new NodeValue(1, 2), new NodeValue(2, 2),
+				new NodeValue(3, 4), new NodeValue(3, 5), new NodeValue(4, 3), };
+		Node<NodeValue> root1 = new Node<NodeValue>(array1[0]);
+		for (int i = 1; i < array1.length; i++) {
+			binaryInsert(root1, array1[i]);
+		}
+
+		// look this binary tree
+		inOrderTraverse(root1);
+
+		if (binarySerach(root1, new NodeValue(1, 2))) {
 			System.out.println("二叉树中存在此元素");
 		} else {
 			System.out.println("二叉树中不存在该元素");
@@ -189,7 +210,7 @@ public class BST {
 			return;
 		}
 		inOrderTraverse(root.getL_child());
-		System.out.print(root.getValue()+"  ");
+		System.out.print(root.getValue() + "  ");
 		inOrderTraverse(root.getR_child());
 	}
 }
