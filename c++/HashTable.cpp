@@ -73,8 +73,13 @@ int main()
 		insertHash(&hashTable, arr[i]);
 	
 	int *elem = hashTable.elem;
-	for(int i=0;i<hashTable.count;i++)
-		printf("%d ", elem[i]);
+	//for(int i=0;i<hashTable.count;i++)
+	//	printf("%d ", elem[i]);
+	while(*elem)
+	{
+		printf("%d ", *elem);
+		elem++;
+	}
 	printf("\n");
 	
 	int addr;
