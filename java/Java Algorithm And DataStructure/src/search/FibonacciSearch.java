@@ -2,11 +2,7 @@ package search;
 
 public class FibonacciSearch {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int[] input = { 0,1,16,24,35,47,59,62,73,88,99, };
 		System.out.print(fibonacci_search(input, 88));
 	}
