@@ -7,7 +7,7 @@ import static net.mindview.util.Print.*;
 public class AllSortMethod {
 
 	public static void main(String[] args) {
-		int[] n = { 9, 1, 5, 8, };
+		int[] n = { 9, 1, 5, 8, 2, 4, 3, 7, 6, };
 		System.out.println(Arrays.toString(n));
 
 		// BubbleSortMethod.bubbleSort0(n);
@@ -15,7 +15,8 @@ public class AllSortMethod {
 		// InsertSortMethod.insertSort(n);
 		// ShellSortMethod.shellSort(n);
 		// MergeSortMethod.mergerSort(n);
-		HeapSortMethod.heapSort(n);
+		// HeapSortMethod.heapSort(n);
+		MergeSortMethod.mergeSort_non_recursion(n);
 	}
 }
 
@@ -191,6 +192,7 @@ class MergeSortMethod {
 		}
 	}
 
+	//这个函数还有优化的空间，可以优化空间复杂度.
 	private static void merge(int[] array, int from, int end, int mid) {
 		int[] tmpArray = new int[end - from + 1];
 		int tmpArrayIndex = 0;
@@ -215,6 +217,41 @@ class MergeSortMethod {
 	public static void mergerSort(int[] n) {
 		partition(n, 0, n.length - 1);
 		System.out.println(Arrays.toString(n));
+	}
+
+	// 归并排序的非递归实现.
+	public static void mergeSort_non_recursion(int[] n) {
+		int k = 1;
+		while (k < n.length) {
+			mergePass(n, k, n.length);
+			k = 2 * k;
+		}
+	}
+
+	/**
+	 * @param sr
+	 *            :source Array
+	 * @param to
+	 *            ：to Array
+	 * @param s
+	 *            : the distance between two merge number
+	 * @param n
+	 *            : the length of merge Array
+	 */
+	private static void mergePass(int[] n, int d, int length) {
+		int i = 0;
+		// 循环，作用是将间隔为d的子序列进行排序.
+		while (i < length) {
+			if (i + 2 * d - 1 < length) {
+				merge(n, i, i + 2 * d - 1, i + d - 1);
+			} else if (i + d - 1 < length && i + 2 * d - 1 >= length) {
+				merge(n, i, length - 1, i + d - 1);
+			} else {
+				merge(n, i, length - 1, i);
+			}
+			print(Arrays.toString(n));
+			i = i + 2 * d;
+		}
 	}
 }
 
