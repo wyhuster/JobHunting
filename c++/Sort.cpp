@@ -1,6 +1,6 @@
 /*!
 * 
-* 实现各种排序算法:冒泡排序、简单选择排序、直接插入排序、希尔排序、
+* 实现各种排序算法:冒泡排序、简单选择排序、直接插入排序、折半插入排序、希尔排序、
 * 堆排序、归并排序(递归)、递归排序(非递归)、快速排序
 * \author tonywang
 * \date 2014/4/16 11:50
@@ -15,8 +15,9 @@
 void swap(int* arr, int i, int j);
 void bubbleSort(int* arr, int length);
 void selectSort(int* arr, int length);
-void insertSort(int* arr,int length);
-void shellSort(int* arr,int length);
+void insertSort(int* arr, int length);
+void binaryInsertSort(int* arr, int length); //折半插入排序
+void shellSort(int* arr, int length);
 void heapSort(int* arr, int length);
 void mergeSort(int* arr, int length);
 void mergeSort2(int* arr, int length);
@@ -35,9 +36,10 @@ int main(int argc, char* argv[])
 	//bubbleSort(number,length);
 	//selectSort(number,length);
 	//insertSort(number,length);
+        binaryInsertSort(number,length);
 	//shellSort(number,length);
 	//heapSort(number,length);
-	mergeSort(number,length);
+	//mergeSort(number,length);
 	//mergeSort2(number,length);
 	//quickSort(number,length);
 
@@ -119,9 +121,48 @@ void insertSort(int* arr,int length)
 		{
 			int temp = arr[i];
 			int j;
-			for(j=i-1;arr[j]>temp;j--)
+			for(j=i-1;arr[j]>temp&&j>=0;j--)
 				arr[j+1] = arr[j];
 			arr[j+1] = temp;
+		}
+	}
+}
+
+
+/**
+--------------------折半插入排序--------------------------
+*时间复杂度：O(n^2) 移动记录次数没变，比较次数减少
+*空间复杂度：O(1)
+*不稳定
+---------------------------------------------------------*/
+void binaryInsertSort(int* arr, int length)
+{
+	for(int i=1;i<length;i++)
+	{
+		if(arr[i]<arr[i-1])
+		{
+			//从0..i-1之中二分查找插入点
+			int temp = arr[i];
+			int low = 0, high = i-1;
+			while(low<=high)
+			{
+				int mid = (low+high)/2;
+				if(temp<arr[mid])
+					high = mid-1;
+				else if(temp>arr[mid])
+					low = mid+1;
+				else
+					break;
+			}
+			int pos = 0;
+			if(low<high) 
+				pos = (low+high)/2 + 1; 
+			else  
+				pos = low;
+			//插入点之后的记录后移
+			for(int m=i-1;m>=pos;m--)
+				arr[m+1] = arr[m];
+			arr[pos] = temp;
 		}
 	}
 }
