@@ -192,6 +192,7 @@ class MergeSortMethod {
 		}
 	}
 
+	//这个函数还有优化的空间，可以优化空间复杂度.
 	private static void merge(int[] array, int from, int end, int mid) {
 		int[] tmpArray = new int[end - from + 1];
 		int tmpArrayIndex = 0;
