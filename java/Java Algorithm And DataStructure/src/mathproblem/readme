@@ -3,3 +3,4 @@ This is a package contains some math problem:
 	2.最大公约数的求取——GCD(greatest common divisor)
 	3.递归实现堆栈反序存储——StackReverseUsingRecursion
 	4.递归实现排列——FullPermutation
+	5.数组平衡点问题(平衡点的含义为：数组中平衡点之前的sum和之后的sum相等)_alibaba面试题
