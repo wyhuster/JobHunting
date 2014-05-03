@@ -5,7 +5,7 @@
 * \date 2014/5/1 17:44
 */
 #include<stdio.h>
-#include<cstring>
+#include<string.h>
 int count = 0;
 
 //交换字符串指针p,q位置的字符值
@@ -81,7 +81,7 @@ void permutation_repeat(char *pStr, int k, int m)
 			if(isSwap(pStr,k,i))
 			{
 				swap(pStr+k, pStr+i);
-				permutation(pStr, k+1, m);
+				permutation_repeat(pStr, k+1, m);
 				swap(pStr+k, pStr+i);
 			}
 		}
