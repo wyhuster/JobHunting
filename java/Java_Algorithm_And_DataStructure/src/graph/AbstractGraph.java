@@ -1,6 +1,7 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -57,7 +58,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 		}
 	}
 
-	/** Create adjacency lists for each vertex */
+	// Create adjacency lists for each vertex
 	private void createAdjacencyLists(List<Edge> edges, int numberOfVertices) {
 		// Create a linked list
 		neighbors = new ArrayList<List<Integer>>();
@@ -151,6 +152,69 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 	}
 
 	/**
+	 * 深度优先遍历算法，思想：从某个顶点出发，然后访问与其相邻的顶点，依次递归下去.
+	 */
+	public Tree dfs(int v) {
+		//申明一个List,用来存储访问元素.
+		List<Integer> searchOrders = new ArrayList<Integer>();
+		int[] parent = new int[vertices.size()];
+		for (int i = 0; i < parent.length; i++){
+			parent[i] = -1;
+		}
+		boolean[] isVisited = new boolean[vertices.size()];
+		
+		dfs(v, parent, searchOrders, isVisited);
+		
+		return new Tree(v, parent, searchOrders);
+	}
+
+	// Recursive method for DFS search
+	private void dfs(int v, int[] parent, List<Integer> searchOrders,
+			boolean[] isVisited) {
+		// Store the visited vertex
+		searchOrders.add(v);
+		isVisited[v] = true;
+
+		for (int i : neighbors.get(v)) {
+			if (!isVisited[i]) {
+				parent[i] = v;
+				dfs(i, parent, searchOrders, isVisited); // Recursive search
+			}
+		}
+	}
+
+	/**
+	 * 广度遍历算法,其思想是：从某个顶点开始，遍历完其所有的邻接顶点，在接着遍历邻接顶点的临界顶点.
+	 */
+	public Tree bfs(int v) {
+		List<Integer> searchOrders = new ArrayList<Integer>();
+		int[] parent = new int[vertices.size()];
+		for (int i = 0; i < parent.length; i++){
+			parent[i] = -1;
+		}
+
+		// list used as a queue
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+
+		boolean[] isVisited = new boolean[vertices.size()];
+		queue.offer(v);
+		isVisited[v] = true;
+
+		while (!queue.isEmpty()) {
+			int u = queue.poll();
+			searchOrders.add(u);
+			for (int w : neighbors.get(u)) {
+				if (!isVisited[w]) {
+					queue.offer(w);
+					parent[w] = u;
+					isVisited[w] = true;
+				}
+			}
+		}
+		return new Tree(v, parent, searchOrders);
+	}
+
+	/**
 	 * @author Administrator
 	 * @description Tree class defined in AbstractGraph<V>.
 	 */
@@ -186,7 +250,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 			return searchOrders.size();
 		}
 
-		/** Return the path of vertices from a vertex index to the root */
+		// Return the path of vertices from a vertex index to the root
 		public List<V> getPath(int index) {
 			ArrayList<V> path = new ArrayList<V>();
 
@@ -198,7 +262,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 			return path;
 		}
 
-		/** Print a path from the root to vertex v */
+		// Print a path from the root to vertex v
 		public void printPath(int index) {
 			List<V> path = getPath(index);
 			System.out.print("A path from " + vertices.get(root) + " to "
@@ -207,7 +271,7 @@ public abstract class AbstractGraph<V> implements Graph<V> {
 				System.out.print(path.get(i) + " ");
 		}
 
-		/** Print the whole tree */
+		// Print the whole tree
 		public void printTree() {
 			System.out.println("Root is: " + vertices.get(root));
 			System.out.print("Edges: ");
