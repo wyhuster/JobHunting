@@ -34,7 +34,7 @@ public class Combination {
 		if(s==null){
 			return;
 		}
-		Stack<Character> result = new Stack<>();
+		Stack<Character> result = new Stack<Character>();
 		int length = s.length();
 		for(int i=1;i<=length;i++){
 			combination(s, 0, i, result);

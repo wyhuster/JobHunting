@@ -21,7 +21,7 @@ public class DisplayUSMap extends JApplet {
 			{ 8, 10 }, { 8, 11 }, { 9, 8 }, { 9, 11 }, { 10, 2 }, { 10, 4 },
 			{ 10, 8 }, { 10, 11 }, { 11, 8 }, { 11, 9 }, { 11, 10 } };
 	
-	private Graph<City> graph = new UnweightedGraph<>(edges, vertices);
+	private Graph<City> graph = new UnweightedGraph<City>(edges, vertices);
 	
 	public DisplayUSMap(){
 		add(new GraphView(graph));
